@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/Chess.css"/>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+	</head>
+	<body>
+		<div class="contain">
+			<div class="chessbg">
+				<div class="redchess">
+					<img src="img/r_c.png" id="rche1" />
+					<img src="img/r_m.png" id="rma1" />
+					<img src="img/r_x.png" id="rxiang1" />
+					<img src="img/r_s.png" id="rshi1" />
+					<img src="img/r_j.png" id="rshuai" />
+					<img src="img/r_s.png" id="rshi2"/>
+					<img src="img/r_x.png" id="rxiang2"/>
+					<img src="img/r_m.png" id="rma2"/>
+					<img src="img/r_c.png" id="rche2"/>
+					<img src="img/r_p.png" id="rpao1"/>
+					<img src="img/r_p.png" id="rpao2"/>
+					<img src="img/r_z.png" id="rbing1"/>
+					<img src="img/r_z.png" id="rbing2"/>
+					<img src="img/r_z.png" id="rbing3"/>
+					<img src="img/r_z.png" id="rbing4"/>
+					<img src="img/r_z.png" id="rbing5"/>
+				</div>
+				<div class="blackchess">
+					<img src="img/b_c.png" id="bche1" />
+					<img src="img/b_m.png" id="bma1" />
+					<img src="img/b_x.png" id="bxiang1" />
+					<img src="img/b_s.png" id="bshi1" />
+					<img src="img/b_j.png" id="bshuai" />
+					<img src="img/b_s.png" id="bshi2"/>
+					<img src="img/b_x.png" id="bxiang2"/>
+					<img src="img/b_m.png" id="bma2"/>
+					<img src="img/b_c.png" id="bche2"/>
+					<img src="img/b_p.png" id="bpao1"/>
+					<img src="img/b_p.png" id="bpao2"/>
+					<img src="img/b_z.png" id="bbing1"/>
+					<img src="img/b_z.png" id="bbing2"/>
+					<img src="img/b_z.png" id="bbing3"/>
+					<img src="img/b_z.png" id="bbing4"/>
+					<img src="img/b_z.png" id="bbing5"/>
+				</div>
+			</div>
+		</div>
+		<!--<div id="XY" style="color: red; font-size:16px ;"></div>-->
+	</body>
+	<script>
+		//测试  坐标 XY
+//		var che_X = $('#che').position().left; 
+//		var che_Y = $('#che').position().top; 
+//		$('#XY').text('X坐标:'+che_X+'\n'+'Y坐标:'+che_Y);
+		
+		//测试  鼠标点击  棋盘位置
+//		$('.chessbg').click(function(e){
+//			e = e||window.event;
+//			var che_X = e.pageX; 
+//			var che_Y = e.pageY; 
+//			$('#XY').text('X坐标:'+che_X+'\n'+'Y坐标:'+che_Y);
+//		});
+		
+		//车 定义
+		var rqiziche1 = document.getElementById('rche1');
+		var rqiziche2 = document.getElementById('rche2');
+		var bqiziche1 = document.getElementById('bche1');
+		var bqiziche2 = document.getElementById('bche2');
+		//车的属性
+		var che = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		che.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rqiziche1.style.left = this.x; rqiziche1.style.top = this.y;}break;
+					case 2:{rqiziche2.style.left = this.x; rqiziche2.style.top = this.y;}break;
+					case 3:{bqiziche1.style.left = this.x; bqiziche1.style.top = this.y;}break;
+					case 4:{bqiziche2.style.left = this.x; bqiziche2.style.top = this.y;}break;
+				}
+			}
+		}
+		var rche1 = new che(0,510,1);
+		var rche2 = new che(457,510,2);
+		var bche1 = new che(457,0,3);
+		var bche2 = new che(0,0,4);
+		rche1.Initposition();
+		rche2.Initposition();
+		bche1.Initposition();
+		bche2.Initposition();
+		
+		//马 定义
+		var rqizima1 = document.getElementById('rma1');
+		var rqizima2 = document.getElementById('rma2');
+		var bqizima1 = document.getElementById('bma1');
+		var bqizima2 = document.getElementById('bma2');
+		//马的属性
+		var ma = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		ma.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rqizima1.style.left = this.x; rqizima1.style.top = this.y;}break;
+					case 2:{rqizima2.style.left = this.x; rqizima2.style.top = this.y;}break;
+					case 3:{bqizima1.style.left = this.x; bqizima1.style.top = this.y;}break;
+					case 4:{bqizima2.style.left = this.x; bqizima2.style.top = this.y;}break;
+				}
+			}
+		}
+		var rma1 = new ma(55,510,1);
+		var rma2 = new ma(400,510,2);
+		var bma1 = new ma(400,0,3);
+		var bma2 = new ma(55,0,4);
+		rma1.Initposition();
+		rma2.Initposition();
+		bma1.Initposition();
+		bma2.Initposition();
+		
+		//相 定义
+		var rqizixiang1 = document.getElementById('rxiang1');
+		var rqizixiang2 = document.getElementById('rxiang2');
+		var bqizixiang1 = document.getElementById('bxiang1');
+		var bqizixiang2 = document.getElementById('bxiang2');
+		//相的属性 
+		var xiang = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		xiang.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rqizixiang1.style.left = this.x; rqizixiang1.style.top = this.y;}break;
+					case 2:{rqizixiang2.style.left = this.x; rqizixiang2.style.top = this.y;}break;
+					case 3:{bqizixiang1.style.left = this.x; bqizixiang1.style.top = this.y;}break;
+					case 4:{bqizixiang2.style.left = this.x; bqizixiang2.style.top = this.y;}break;
+				}
+			}
+		}
+		var rxiang1 = new xiang(110,510,1);
+		var rxiang2 = new xiang(345,510,2);
+		var bxiang1 = new xiang(345,0,3);
+		var bxiang2 = new xiang(110,0,4);
+		rxiang1.Initposition();
+		rxiang2.Initposition();
+		bxiang1.Initposition();
+		bxiang2.Initposition();
+		
+		//士 定义
+		var rqizishi1 = document.getElementById('rshi1');
+		var rqizishi2 = document.getElementById('rshi2');
+		var bqizishi1 = document.getElementById('bshi1');
+		var bqizishi2 = document.getElementById('bshi2');
+		//士的属性
+		var shi = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		shi.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rqizishi1.style.left = this.x; rqizishi1.style.top = this.y;}break;
+					case 2:{rqizishi2.style.left = this.x; rqizishi2.style.top = this.y;}break;
+					case 3:{bqizishi1.style.left = this.x; bqizishi1.style.top = this.y;}break;
+					case 4:{bqizishi2.style.left = this.x; bqizishi2.style.top = this.y;}break;
+				}
+			}
+		}
+		var rshi1 = new shi(167,510,1);
+		var rshi2 = new shi(290,510,2);
+		var bshi1 = new shi(290,0,3);
+		var bshi2 = new shi(167,0,4);
+		rshi1.Initposition();
+		rshi2.Initposition();
+		bshi1.Initposition();
+		bshi2.Initposition();
+		
+		//帅 定义
+		var rshuai = document.getElementById('rshuai');
+		var bshuai = document.getElementById('bshuai');
+		
+		//帅的属性
+		var shuai = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		shuai.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rshuai.style.left = this.x; rshuai.style.top = this.y;}break;
+					case 2:{bshuai.style.left = this.x; bshuai.style.top = this.y;}break;
+				}
+			}
+		}
+		var shuair = new shuai(225,510,1);
+		var jiang = new shuai(225,0,2);
+		shuair.Initposition();
+		jiang.Initposition();
+		
+		//炮 定义
+		var rqizipao1 = document.getElementById('rpao1');
+		var rqizipao2 = document.getElementById('rpao2');
+		var bqizipao1 = document.getElementById('bpao1');
+		var bqizipao2 = document.getElementById('bpao2');
+		//炮 的属性
+		var pao = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		pao.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rqizipao1.style.left = this.x; rqizipao1.style.top = this.y;}break;
+					case 2:{rqizipao2.style.left = this.x; rqizipao2.style.top = this.y;}break;
+					case 3:{bqizipao1.style.left = this.x; bqizipao1.style.top = this.y;}break;
+					case 4:{bqizipao2.style.left = this.x; bqizipao2.style.top = this.y;}break;
+				}
+			}
+		}
+		var rpao1 = new pao(55,400,1);
+		var rpao2 = new pao(400,400,2);
+		var bpao1 = new pao(400,110,3);
+		var bpao2 = new pao(55,110,4);
+		rpao1.Initposition();
+		rpao2.Initposition();
+		bpao1.Initposition();
+		bpao2.Initposition();
+		
+		//兵 卒子 定义
+		var rqizibing1 = document.getElementById('rbing1');
+		var rqizibing2 = document.getElementById('rbing2');
+		var rqizibing3 = document.getElementById('rbing3');
+		var rqizibing4 = document.getElementById('rbing4');
+		var rqizibing5 = document.getElementById('rbing5');
+	
+		var bqizibing1 = document.getElementById('bbing1');
+		var bqizibing2 = document.getElementById('bbing2');
+		var bqizibing3 = document.getElementById('bbing3');
+		var bqizibing4 = document.getElementById('bbing4');
+		var bqizibing5 = document.getElementById('bbing5');
+		//兵 卒子 的属性
+		var bing = function(x,y,whitch){
+			this.x = x+'px';
+			this.y = y+'px';
+			this.whitch = whitch;
+		}
+		bing.prototype={
+			Initposition:function(){
+				switch(this.whitch){
+					case 1:{rqizibing1.style.left = this.x; rqizibing1.style.top = this.y;}break;
+					case 2:{rqizibing2.style.left = this.x; rqizibing2.style.top = this.y;}break;
+					case 3:{rqizibing3.style.left = this.x; rqizibing3.style.top = this.y;}break;
+					case 4:{rqizibing4.style.left = this.x; rqizibing4.style.top = this.y;}break;
+					case 5:{rqizibing5.style.left = this.x; rqizibing5.style.top = this.y;}break;
+					
+					
+					case 6:{bqizibing1.style.left = this.x; bqizibing1.style.top = this.y;}break;
+					case 7:{bqizibing2.style.left = this.x; bqizibing2.style.top = this.y;}break;
+					case 8:{bqizibing3.style.left = this.x; bqizibing3.style.top = this.y;}break;
+					case 9:{bqizibing4.style.left = this.x; bqizibing4.style.top = this.y;}break;
+					case 10:{bqizibing5.style.left = this.x; bqizibing5.style.top = this.y;}break;
+				}
+			}
+		}
+		var rbing1 = new bing(0,343,1);
+		var rbing2 = new bing(110,343,2);
+		var rbing3 = new bing(225,343,3);
+		var rbing4 = new bing(335,343,4);
+		var rbing5 = new bing(455,343,5);
+		
+		var bbing1 = new bing(0,167,6);
+		var bbing2 = new bing(110,167,7);
+		var bbing3 = new bing(225,167,8);
+		var bbing4 = new bing(335,167,9);
+		var bbing5 = new bing(455,167,10);
+		rbing1.Initposition();
+		rbing2.Initposition();
+		rbing3.Initposition();
+		rbing4.Initposition();
+		rbing5.Initposition();
+		
+		bbing1.Initposition();
+		bbing2.Initposition();
+		bbing3.Initposition();
+		bbing4.Initposition();
+		bbing5.Initposition();
+	</script>
+</html>
